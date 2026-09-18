@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FaceFilter AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Load Google Fonts for a futuristic look -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="glass-panel">
+            <div class="logo-area">
+                <h1>FaceFilter <span class="neon-text">AI</span></h1>
+                <p>Real-time AI-powered face filters</p>
+            </div>
+            <div class="status-indicator">
+                <div class="status-dot" id="status-dot"></div>
+                <span id="status-text">Camera Starting...</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-layout">
+            <!-- Video Area -->
+            <section class="video-section glass-panel">
+                <div class="video-wrapper">
+                    <!-- Hidden video element for raw webcam stream -->
+                    <video id="webcam-video" autoplay playsinline style="display: none;"></video>
+                    <!-- Visible canvas for processed output -->
+                    <canvas id="output-canvas"></canvas>
+                    
+                    <!-- Overlays -->
+                    <div id="recording-indicator" class="hidden">
+                        <div class="rec-dot"></div> REC
+                    </div>
+                </div>
+                
+                <div class="controls-bar">
+                    <button id="btn-capture" class="action-btn">
+                        <span>📸</span> Capture (SPACE)
+                    </button>
+                    <button id="btn-record" class="action-btn record-btn">
+                        <span>⏺</span> Record (R)
+                    </button>
+                </div>
+            </section>
+
+            <!-- Sidebar Controls -->
+            <aside class="sidebar glass-panel">
+                <h2>Select Filter</h2>
+                <div class="filter-grid">
+                    <button class="filter-btn active" data-filter=""><span>🚫</span> None</button>
+                    <button class="filter-btn" data-filter="dog"><span>🐶</span> Dog (1)</button>
+                    <button class="filter-btn" data-filter="sunglasses"><span>😎</span> Glasses (2)</button>
+                    <button class="filter-btn" data-filter="crown"><span>👑</span> Crown (3)</button>
+                    <button class="filter-btn" data-filter="rainbow"><span>🌈</span> Rainbow (4)</button>
+                    <button class="filter-btn" data-filter="neon"><span>⚡</span> Neon (5)</button>
+                    <button class="filter-btn" data-filter="vintage"><span>📷</span> Vintage (6)</button>
+                    <button class="filter-btn" data-filter="cyberpunk"><span>🤖</span> Cyberpunk (7)</button>
+                    <button class="filter-btn" data-filter="sketch"><span>✏️</span> Sketch (8)</button>
+                    <button class="filter-btn" data-filter="pixelate"><span>🟪</span> Pixelate (9)</button>
+                    <button class="filter-btn" data-filter="mirror"><span>🪞</span> Mirror (0)</button>
+                </div>
+
+                <div class="gallery-section">
+                    <h3>Gallery</h3>
+                    <div id="gallery-grid" class="gallery-grid">
+                        <!-- Captured photos will appear here -->
+                    </div>
+                </div>
+            </aside>
+        </main>
+        
+        <!-- Keyboard Shortcuts Help -->
+        <div class="shortcuts-overlay glass-panel">
+            <h3>Shortcuts</h3>
+            <ul>
+                <li><code>1-0</code> : Select Filters</li>
+                <li><code>SPACE</code> : Capture Photo</li>
+                <li><code>R</code> : Start/Stop Record</li>
+                <li><code>ESC</code> : Clear Filter</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Hidden canvas for capturing raw frames to send to server -->
+    <canvas id="capture-canvas" style="display: none;"></canvas>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
